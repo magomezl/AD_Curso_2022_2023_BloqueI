@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Ejercicio1_3 {
 	
+	private static int nivel = 0;
+	private static int cuentaElementos = 0;
+	
 	public static void ejercicio1_2() {
 		File dirActual = new File(".");
 		
@@ -23,6 +26,7 @@ public class Ejercicio1_3 {
 	    	 if (f.isFile()) {
 	    		 trataFichero(f);
 	    	 }else {
+	    		 
 	    		 trataDirectorio(f);
 	    	 }
 	    }else {
@@ -33,20 +37,27 @@ public class Ejercicio1_3 {
 	public static void trataDirectorio(File f) {
 		
 		File[] contenido = f.listFiles();
-		System.out.println("d\t" + f.getName() + "\t\t" + contenido.length + " elementos");
+		cuentaElementos = contenido.length;
+		++nivel;
+		StringBuilder cad = new StringBuilder();
+		for (int i=0; i<=nivel; i++)
+			cad.append("\t");
+		System.out.println(cad.append("d\t" + f.getName() + "\t\t" + contenido.length + " elementos"));
 		for (File itemFile: contenido) {
 			 if (itemFile.isFile()) {
-				 System.out.print("\t");
 	    		 trataFichero(itemFile);
 	    	 }else {
-	    		 System.out.print("\t");
 	    		 trataDirectorio(itemFile);
 	    	 }
+    		 --cuentaElementos;
 		}
 	}
 
 	public static void trataFichero(File f) {
-		System.out.println("f\t" + f.getName() + "\t(" + f.length() + "bytes)\t" + (f.canRead()?"r":"-") + (f.canWrite()?"w":"-") + (f.canExecute()?"x":"-"));
+		StringBuilder cad = new StringBuilder();
+		for (int i=0; i<=nivel; i++)
+			cad.append("\t");
+		System.out.println(cad.append("f\t" + f.getName() + "\t(" + f.length() + "bytes)\t" + (f.canRead()?"r":"-") + (f.canWrite()?"w":"-") + (f.canExecute()?"x":"-")));
 	}
 	
 	public static void main(String[] args) {
