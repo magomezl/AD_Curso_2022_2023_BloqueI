@@ -25,6 +25,7 @@ public class Ejercicio1_3 {
 		
 		System.out.println ("Por favor introduzca el nombre del fichero o directorio:");
 	    String nombre = "."+ System.getProperty("file.separator") + scn.nextLine (); 
+	    
 	    File f = new File(nombre);
 	    if (f.exists()) {
 	    	
